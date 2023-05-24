@@ -12,7 +12,7 @@ class App extends Component {
     return (
       <Container component="article" maxWidth="sm">
         {/* Container principal do aplicativo com largura máxima definida */}
-        <Typography variant="h3" align='center'>
+      <Typography variant="h3" align='center' >
           {/* Título do formulário */}
           Formulário de Cadastro
         </Typography>
