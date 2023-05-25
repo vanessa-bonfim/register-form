@@ -4,7 +4,7 @@ import UserData from "./UserData";
 import DeliveryData from "./DeliveryData";
 import { Step, StepLabel, Stepper, Typography } from "@mui/material";
 
-function FormRegister({ onSubmit, validationCPF }) {
+function FormRegister({ onSubmit, validations }) {
 
   const [currentStage, setCurrentStage] = useState(0);
   const [collectedData, setData] = useState({});
@@ -14,10 +14,10 @@ function FormRegister({ onSubmit, validationCPF }) {
     }
   })
   const form = [
-    <UserData onSubmit={collectData}/>,
-    <PersonalData onSubmit={collectData} validationCPF={validationCPF}/>,
-    <DeliveryData onSubmit={collectData}/>,
-    <Typography variant="h5" margin="">Obrigada pelo cadastro!</Typography>
+    <UserData onSubmit={collectData} validations={validations}/>,
+    <PersonalData onSubmit={collectData} validations={validations}/>,
+    <DeliveryData onSubmit={collectData} validations={validations}/>,
+    <Typography variant="h5" margin="normal">Obrigada pelo cadastro!</Typography>
   ]
   function collectData(data) {
     setData({...collectedData, ...data});

@@ -21,7 +21,7 @@ function DeliveryData({ onSubmit }) {
         label="CEP"
         type="number"
         variant="outlined"
-        margin="dense"
+        margin="normal"
         fullWidth
       />
       <TextField
@@ -33,7 +33,7 @@ function DeliveryData({ onSubmit }) {
         label="Endereço"
         type="text"
         variant="outlined"
-        margin="dense"
+        margin="normal"
         fullWidth
       />
       <TextField
@@ -45,7 +45,7 @@ function DeliveryData({ onSubmit }) {
         label="Número"
         type="number"
         variant="outlined"
-        margin="dense"
+        margin="normal"
       />
       <TextField
         value={state}
@@ -56,7 +56,7 @@ function DeliveryData({ onSubmit }) {
         label="Estado"
         type="text"
         variant="outlined"
-        margin="dense"
+        margin="normal"
       />
       <TextField
         value={city}
@@ -67,9 +67,9 @@ function DeliveryData({ onSubmit }) {
         label="Cidade"
         type="text"
         variant="outlined"
-        margin="dense"
+        margin="normal"
       />
-      <Button type="submit" variant="contained" color="primary" margin="dense" fullWidth>
+      <Button type="submit" variant="contained" color="primary" margin="normal" fullWidth>
         Finalizar Cadastro
       </Button>
     </form>
