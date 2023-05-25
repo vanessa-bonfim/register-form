@@ -1,45 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PersonalData from "./PersonalData";
 import UserData from "./UserData";
 import DeliveryData from "./DeliveryData";
+import { Step, StepLabel, Stepper, Typography } from "@mui/material";
 
 function FormRegister({ onSubmit, validationCPF }) {
 
   const [currentStage, setCurrentStage] = useState(0);
-
-  const form = [
-    <UserData onSubmit={next}/>,
-    <PersonalData onSubmit={next} validationCPF={validationCPF}/>,
-    <DeliveryData onSubmit={onSubmit}/>,
-
-  ]
-
-  function next() {
-    setCurrentStage(currentStage+1);
-  }
-
-/*  
-  Criamos um array chamado form lá acima para substituir este código abaixo: 
-
-  function currentForm(stage) {
-    switch (stage) {
-      case 0:
-        return <UserData onSubmit={next}/>;
-      case 1:
-        return <PersonalData onSubmit={next} validationCPF={validationCPF}/>;
-      case 2:
-        return <DeliveryData onSubmit={onSubmit}/>;
-
-      default:
-        return <Typography>Erro ao selecionar formulário</Typography>;
+  const [collectedData, setData] = useState({});
+  useEffect(()=>{
+    if(currentStage === form.length){
+      onSubmit(collectedData);
     }
-  } 
-  
-  Depois colocamos no return {form[currentStage]}
-  */
-
+  })
+  const form = [
+    <UserData onSubmit={collectData}/>,
+    <PersonalData onSubmit={collectData} validationCPF={validationCPF}/>,
+    <DeliveryData onSubmit={collectData}/>,
+    <Typography variant="h5" margin="">Obrigada pelo cadastro!</Typography>
+  ]
+  function collectData(data) {
+    setData({...collectedData, ...data});
+    /* console.log(collectedData); */
+    next();
+  }
+  function next() {
+    setCurrentStage(currentStage + 1);
+  }
   return (
     <>
+      <Stepper activeStep={currentStage}>
+        <Step><StepLabel>Login</StepLabel></Step>
+        <Step><StepLabel>Pessoal</StepLabel></Step>
+        <Step><StepLabel>Entrega</StepLabel></Step>
+        <Step><StepLabel>Finalização</StepLabel></Step>
+      </Stepper>
       {form[currentStage]}
     </>
   );
