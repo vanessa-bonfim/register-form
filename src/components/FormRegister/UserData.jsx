@@ -1,32 +1,14 @@
 import React, { useContext, useState } from "react";
 import { Button, TextField } from "@mui/material";
 import RegisterValidation from "../../contexts/RegisterValidation";
+import useError from "../../hooks/useError";
 
 function UserData({ onSubmit }) {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
-  const [error, setError] = useState({
-    email: { valid: true, text: "" },
-    pass: { valid: true, text: "" },
-  });
-
   const validations = useContext(RegisterValidation);
+  const [error, validateFields, canSend] = useError(validations);
 
-  function validateFields(event) {
-    const { name, value } = event.target;
-    const newState = { ...error };
-    newState[name] = validations[name](value);
-    setError(newState);
-  }
-
-  function canSend() {
-    for(let field in error){
-      if (!error[field].valid) {
-        return false
-      }
-      return true;
-    }
-  }
   return (
     <form
       onSubmit={(event) => {

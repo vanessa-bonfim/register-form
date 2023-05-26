@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Button, TextField, FormControlLabel, Switch } from "@mui/material";
 import RegisterValidation from "../../contexts/RegisterValidation";
+import useError from "../../hooks/useError";
 
 function PersonalData({ onSubmit }) {
   /*
@@ -21,19 +22,8 @@ function PersonalData({ onSubmit }) {
   const [cpf, setCpf] = useState(""); // Estado para o CPF
   const [sale, setSale] = useState(true); // Estado para a opção de promoção
   const [news, setNews] = useState(false); // Estado para a opção de novidades
-  const [error, setError] = useState({
-    cpf: { valid: true, text: "" },
-    name: { valid: true, text: "" },
-  }); // Estado para o erro de validação do CPF
-
-  const validations = useContext(RegisterValidation)
-
-  function validateFields(event) {
-    const { name, value } = event.target;
-    const newState = { ...error };
-    newState[name] = validations[name](value);
-    setError(newState);
-  }
+  const validations = useContext(RegisterValidation);
+  const [error, validateFields] = useError(validations);
 
   return (
     <form
